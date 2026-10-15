@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-	PATH+DOCKER = 'C:\\Users\\risho\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin'
+	PATH+DOCKER = "C:\\Users\\risho\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
 
         IMAGE = 'rishonalancy/university-lms'
         DEPLOYMENT = 'lms-portal'
