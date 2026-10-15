@@ -8,8 +8,8 @@ pipeline {
 
     environment {
 	
-	PATH = "C:\\Users\\risho\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
-	IMAGE = 'rishonalancy/university-lms'
+		PATH = "C:\\Users\\risho\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
+		IMAGE = 'rishonalancy/university-lms'
         DEPLOYMENT = 'lms-portal'
         CONTAINER = 'lms-portal'
     }
