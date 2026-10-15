@@ -5,6 +5,16 @@ pipeline {
         skipDefaultCheckout(true)
         timestamps()
     }
+    
+    
+    parameters {
+        booleanParam(
+            name: 'TEST_ROLLBACK',
+            defaultValue: false,
+            description: 'Enable to test automatic rollback using an invalid image'
+        )
+    }
+
 
     environment {
 	
@@ -64,7 +74,13 @@ pipeline {
                     script {
                         bat 'kubectl apply -f deployment.yaml'
 
-                        bat "kubectl set image deployment/%DEPLOYMENT% %CONTAINER%=%IMAGE%:%BUILD_NUMBER%"
+                        
+                        def releaseTag = params.TEST_ROLLBACK
+                            ? 'rollback-test-nonexistent'
+                            : env.BUILD_NUMBER
+
+                        bat "kubectl set image deployment/${env.DEPLOYMENT} ${env.CONTAINER}=${env.IMAGE}:${releaseTag}"
+
 
                         def rolloutResult = bat(
                             returnStatus: true,
